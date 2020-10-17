@@ -7,9 +7,10 @@
     "start": "NODE_ENV=development node src/index.js",
     "local": "NODE_ENV=local nodemon src/index.js",
     "test": "mocha test/**/*.spec.js",
-    "migrate": "NODE_ENV=local npx sequelize-cli db:migrate",
+    "migrate:local": "NODE_ENV=local npx sequelize-cli db:migrate",
+    "migrate:dev": "NODE_ENV=development npx sequelize-cli db:migrate",
     "lint": "eslint ./src --fix",
-    "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate"
+    "reset:local": "npx sequelize-cli db:migrate:undo:all && npm run migrate"
   },
   "dependencies": {
     "@types/node": "13.7.6",
