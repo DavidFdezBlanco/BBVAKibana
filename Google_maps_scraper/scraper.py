@@ -3,11 +3,13 @@ from googlemaps import GoogleMapsScraper
 from datetime import datetime, timedelta
 import argparse
 import csv
+import ctypes
 
-HEADER = ['id_review', 'caption', 'relative_date', 'retrieval_date', 'rating', 'username', 'n_review_user', 'n_photo_user', 'url_user', 'city']
-HEADER_W_SOURCE = ['id_review', 'caption', 'relative_date','retrieval_date', 'rating', 'username', 'n_review_user', 'n_photo_user', 'url_user', 'url_source','city']
+HEADER = ['id_review', 'caption', 'relative_date', 'retrieval_date', 'rating', 'username', 'n_review_user', 'n_photo_user', 'url_user', 'city', 'country']
+HEADER_W_SOURCE = ['id_review', 'caption', 'relative_date','retrieval_date', 'rating', 'username', 'n_review_user', 'n_photo_user', 'url_user', 'url_source','city', 'country']
 
-def csv_writer(source_field, path='data/', outfile='gm_reviews.csv'):
+def csv_writer(source_field, outfile, path='data/'):
+    print("outfile is " + outfile)
     targetfile = open(path + outfile, mode='w', encoding='utf-8', newline='\n')
     writer = csv.writer(targetfile, quoting=csv.QUOTE_MINIMAL)
 
@@ -24,6 +26,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Google Maps reviews scraper.')
     parser.add_argument('--N', type=int, default=100, help='Number of reviews to scrape')
     parser.add_argument('--i', type=str, default='data/agencies.csv', help='target URLs file')
+    parser.add_argument('--o', type=str, default='reviews.csv', help='target URLs file')
     parser.add_argument('--place', dest='place', action='store_true', help='Scrape place metadata')
     parser.add_argument('--debug', dest='debug', action='store_true', help='Run scraper using browser graphical interface')
     parser.add_argument('--source', dest='source', action='store_true', help='Add source url to CSV file (for multiple urls in a single file)')
@@ -32,7 +35,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # store reviews in CSV file
-    writer = csv_writer(args.source)
+    writer = csv_writer(args.source, args.o)
 
     with GoogleMapsScraper(debug=args.debug) as scraper:
         num_lines = sum(1 for line in open(args.i)) - 1
@@ -59,6 +62,7 @@ if __name__ == '__main__':
                             for r in reviews:
                                 row_data = list(r.values())
                                 row_data.append(agency[1])
+                                row_data.append(agency[2])
                                 if args.source:
                                     row_data.append(url)
 
@@ -71,3 +75,4 @@ if __name__ == '__main__':
                                 ns = args.N
                             
                 agency_index += 1
+    ctypes.windll.user32.MessageBoxW(0, "Success", "Scraper_agencies.py just finished", 1)

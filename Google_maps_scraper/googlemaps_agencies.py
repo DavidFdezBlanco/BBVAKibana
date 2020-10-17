@@ -84,9 +84,22 @@ class GoogleMapsScraperAgencies:
 
         time.sleep(4)
         #click n link
-        element = self.driver.find_element_by_xpath("//div[@data-result-index=" + str(n) + "]")
-        element.click()
-        time.sleep(4)
+        clicked = False
+        tries = 0
+        while not clicked and tries < MAX_RETRY:
+            try:
+                menu_bt = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@data-result-index=" + str(n) + "]")))
+                menu_bt.click()
+
+                clicked = True
+                time.sleep(3)
+            except Exception as e:
+                tries += 1
+                self.logger.warn('Failed to click recent button')
+
+            # failed to open the dropdown
+            if tries == MAX_RETRY:
+                return -1
 
         #click on reviews
         clicked = False
