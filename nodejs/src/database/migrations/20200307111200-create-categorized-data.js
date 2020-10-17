@@ -16,7 +16,7 @@ module.exports = {
             allowNull: false,
         },
         comment: {
-            type: Sequelize.STRING(1000),
+            type: Sequelize.STRING(100000),
             allowNull: true
         },
     }),
