@@ -13,7 +13,7 @@ import re
 import logging
 import traceback
 
-GM_WEBPAGE = 'https://www.google.com/maps/'
+BASE_URL = 'https://www.google.com/maps/search/'
 MAX_WAIT = 10
 MAX_RETRY = 5
 MAX_SCROLLS = 40
@@ -38,56 +38,48 @@ class GoogleMapsScraper:
         return True
 
     def sort_by_date(self, url):
+        
         self.driver.get(url)
         wait = WebDriverWait(self.driver, MAX_WAIT)
         
         time.sleep(5)
         
         # Agree on cookies
-        # Switch to cookies frame
-
         try:
+            # Switch to cookies frame
             iframe = self.driver.find_element_by_xpath("//iframe[@class='widget-consent-frame']")
             self.driver.switch_to.frame(iframe)
+            
+            clicked = False
+            tries = 0
+            while not clicked and tries < MAX_RETRY:
+                try:
+                    #if not self.debug:
+                    #    menu_bt = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.cYrDcjyGO77__container')))
+                    #else:
+                    menu_bt = wait.until(EC.presence_of_element_located((By.ID, 'introAgreeButton')))
+                    menu_bt.click()
+
+                    clicked = True
+                    time.sleep(3)
+                except Exception as e:
+                    tries += 1
+                    self.logger.warn('Failed to click recent button')
+
+                # failed to open the dropdown
+                if tries == MAX_RETRY:
+                    return -1
+            #go back to main iframe
+            self.driver.switch_to.default_content()
         except:
-            print("no consent needed")
-        clicked = False
-        tries = 0
-        while not clicked and tries < MAX_RETRY:
-            try:
-                #if not self.debug:
-                #    menu_bt = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.cYrDcjyGO77__container')))
-                #else:
-                menu_bt = wait.until(EC.presence_of_element_located((By.ID, 'introAgreeButton')))
-                menu_bt.click()
-
-                clicked = True
-                time.sleep(3)
-            except Exception as e:
-                tries += 1
-                self.logger.warn('Failed to click recent button')
-
-            # failed to open the dropdown
-            if tries == MAX_RETRY:
-                return -1
-        #time.sleep(100000)
+            print("No cookies to accept")
         
-        #go back to main iframe
-        self.driver.switch_to.default_content()
-        
-        #element = self.driver.find_element(By.XPATH, '//button[@data-value=\'Sort\']')
-        #element.click()
-        #print(element)
         # open dropdown menu
         clicked = False
         tries = 0
         while not clicked and tries < MAX_RETRY:
             try:
-                #if not self.debug:
-                #    menu_bt = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.cYrDcjyGO77__container')))
-                #else:
-                print(tries)
-                menu_bt = wait.until(EC.presence_of_element_located((By.XPATH, '//button[@data-value=\'Sort\']')))
+                menu_bt = wait.until(EC.presence_of_element_located((By.XPATH, '//button[@data-value=\'Ordenar\']')))
                 menu_bt.click()
 
                 clicked = True
@@ -256,7 +248,7 @@ class GoogleMapsScraper:
             options.add_argument("--window-size=1366,768")
 
         options.add_argument("--disable-notifications")
-        options.add_argument("--lang=en-GB")
+        options.add_argument("--lang=es-ES")
         options.add_argument("disable-infobars")
         #options.binary_location("C:\Program Files\Google\Chrome\Application")
         

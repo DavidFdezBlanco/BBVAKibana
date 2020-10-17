@@ -1,6 +1,8 @@
 # Google Maps Scraper
 Scraper of Google Maps reviews.
-The code allows to extract the **most recent** reviews starting from the url of a specific Point Of Interest (POI) in Google Maps.
+This code contains two different scrapers which get data from Google Maps without needing access to the API:
+  1. scraper_agencies.py : Getting the a list of result urls from a search query using a given list of cities as input
+  2. scraper.py : Getting a list of the user ratings for a list of given urls (output of the first scraper)
 
 
 ## Installation
@@ -13,13 +15,26 @@ Follow these steps to use the scraper:
 **Note**: Python >= 3.6 is required.
 
 ## Usage
-The scraper needs two main parameters as input:
-- `--i`: input file name, containing a list of urls that point to Google Maps place reviews (default: _urls.txt_)
-- `--N`: number of reviews to retrieve, starting from the most recent (default: 100)
+The first scraper needs three main parameters as input:
+- `--i`: input file name, containing a list of cities in which to look for results (default: _cities.txt_)
+- `--N`: number of elements to retrieve, starting from the most recent (default: 100)
+- `--query`: the desired search query (default: 'bbva')
+
+Example:
+
+  `python scraper_agencies.py --N 50 `
+  
+  generates a csv file containing the urls, city and general rating of the first 50 results of "bbva" of places present in _cities.txt_
+  This csv file will serve as input for the second scraper.
+
+The second scraper needs two main parameters as input:
+- `--i`: input file name, containing a list of urls that point to Google Maps place reviews (default: _data/agencies.csv_)
+- `--N`: number of elements to retrieve, starting from the most recent (default: 100)
 
 Example:
 
   `python scraper.py --N 50`
+
 
 generates a csv file containing last 50 reviews of places present in _urls.txt_
 
