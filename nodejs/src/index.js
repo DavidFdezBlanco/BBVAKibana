@@ -2,8 +2,6 @@ const app = require('express')();
 const bodyParser = require('body-parser');
 require('custom-env').env(process.env.NODE_ENV, './');
 
-const { mustBeLoggedIn } = require('./middleware/auth');
-
 const ratingsController = require('./controllers/ratings');
 const clusterController = require('./controllers/cluster');
 
@@ -22,7 +20,6 @@ console.log(`Running on ${process.env.ENVIRONMENT} environment`);
     PRIVATE ROUTES UNDER /API
 */
 
-// app.use('/api', mustBeLoggedIn);
 app.use('/api/ratings', ratingsController);
 app.use('/api/cluster', clusterController);
 
