@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Rating = sequelize.define('Rating', {
-        rating_id: {
+        id: {
             type: DataTypes.STRING,
             primaryKey: true,
             autoIncrement: true,

@@ -1,8 +1,8 @@
 
 module.exports = {
     up: (queryInterface, Sequelize) => queryInterface.createTable('ratings', {
-        rating_id: {
-            type: Sequelize.STRING,
+        id: {
+            type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
@@ -37,6 +37,17 @@ module.exports = {
             references: {
                 model: {
                     tableName: 'cluster',
+                    schema: 'public',
+                },
+                key: 'id',
+            },
+        },
+        subcluster_id: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: {
+                    tableName: 'subcluster',
                     schema: 'public',
                 },
                 key: 'id',

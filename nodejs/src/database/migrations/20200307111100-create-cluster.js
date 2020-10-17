@@ -2,7 +2,7 @@
 
 module.exports = {
     up: (queryInterface, Sequelize) => queryInterface.createTable('cluster', {
-        cluster_id: {
+        id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,

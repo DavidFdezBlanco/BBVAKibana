@@ -2,7 +2,7 @@
 
 module.exports = {
     up: (queryInterface, Sequelize) => queryInterface.createTable('subcluster', {
-        subcluster_id: {
+        id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
