@@ -1,15 +1,24 @@
 
 const ratingService = require('../../services/rating.service');
+const clusterService = require('../../services/cluster.service');
 
 const getRatings = async (req, res) => {
 
-    const params = req.body;
+    const params = req.query;
     const {
-        country, category, date_start, date_end
+        country, cluster_id, date_start, date_end
     } = params;
-    const ratings = await ratingService.getRatings(country, category, date_start, date_end);
+    console.log(req.params, cluster_id, date_start, date_end);
+    if (!country) return res.status(400).json({ message: "country is mandatory"});
+    const clusters = await clusterService.getCategories();
 
-    return res.status(200).json(ratings);
+    const ratings = await ratingService.getRatingsByCluster(clusters, country, cluster_id, date_start, date_end);
+    const ratingsCount = await ratingService.getRatingsCount(clusters, country, cluster_id, date_start, date_end);
+
+    return res.status(200).json({
+        cluster_avg: ratings,
+        comments_count: ratingsCount
+    });
 };
 
 
