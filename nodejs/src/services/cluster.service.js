@@ -1,6 +1,5 @@
 const models = require('../database/models');
-const Cluster = { models };
-
+const Cluster = models.Cluster;
 const saveCluster = async (clusters) => {
     console.log(`saving ${clusters.length} clusters`);
     try {

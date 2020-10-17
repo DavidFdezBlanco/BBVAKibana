@@ -13,7 +13,7 @@
     "lint": "eslint ./src --fix",
     "reset:local": "NODE_ENV=local npx sequelize-cli db:migrate:undo:all && npm run migrate:local",
     "reset:dev": "NODE_ENV=development npx sequelize-cli db:migrate:undo:all && npm run migrate:dev",
-    "integrate": "NODE_ENV=local nodemon src/integration/index.js",
+    "integrate": "NODE_ENV=local node src/integration/index.js",
     "integrate:dev": "NODE_ENV=development node src/integration/index.js"
   },
   "dependencies": {

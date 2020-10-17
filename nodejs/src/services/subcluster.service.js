@@ -4,7 +4,7 @@ const Subcluster = models.Subcluster;
 const saveSubcluster = async (subclusters) => {
     console.log(`saving ${subclusters.length} subclusters`);
     try {
-        await Subcluster.bulkCreate(subclusters);
+        await Subcluster.bulkCreate(subclusters, { updateOnDuplicate: ['label', 'words'] });
     } catch (e) {
         console.error(e);
     }

@@ -13,7 +13,7 @@ module.exports = {
         },
         comment: {
             type: Sequelize.STRING,
-            allowNull: true,
+            allowNull: true
         },
         date: {
             type: Sequelize.DATE,

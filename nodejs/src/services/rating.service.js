@@ -1,10 +1,10 @@
 const models = require('../database/models');
 const Rating = models.Rating;
 
-const saveRating = async (Ratings) => {
-    console.log(`saving ${Ratings.length} Ratings`);
+const saveRating = async (ratings) => {
+    console.log(`saving ${ratings.length} Ratings`);
     try {
-        await Rating.bulkCreate(Ratings);
+        await Rating.bulkCreate(ratings);
     } catch (e) {
         console.error(e);
     }
