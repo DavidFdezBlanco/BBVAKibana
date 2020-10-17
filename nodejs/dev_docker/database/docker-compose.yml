@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  postgres:
+    image: "postgres" # use latest official postgres version
+    env_file:
+      - database.env # configure postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgresql
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - postgres
+    ports:
+      - 5050:80
+    networks:
+      - postgresql 
+    ## you can change pgAdmin default username/password with below environment variables
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+       - pgadmin:/var/lib/.pgadmin
+
+networks:
+  postgresql:
+    driver: bridge
+
+volumes:
+  db_data:
+  pgadmin:
