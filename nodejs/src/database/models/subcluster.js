@@ -10,11 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         label: {
             type: DataTypes.STRING,
             allowNull: true,
-        },
-        words: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: true,
-        },
+        }
     }, {
         timestamps: false,
         tableName: 'subcluster',

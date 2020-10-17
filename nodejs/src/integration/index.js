@@ -15,14 +15,14 @@ console.log('arguments: ', arguments);
 const fileUrlToIntegrate = path.resolve('./src/integration') + '/' + arguments[0];
 console.log("[INFO] integrating : ", fileUrlToIntegrate);
 
-function generateCluster(id, label, words) {
-    let cluster = { id: parseInt(id), label, words: words.split() };
+function generateCluster(id, label) {
+    let cluster = { id: parseInt(id), label };
     // console.log("[INFO] Generating cluster", cluster);
     return cluster;
 };
 
-function generateSubcluster(id, label, words, clusterId) {
-    const subcluster = { id: parseInt(id), label, words: words.split(), cluster_id: parseInt(clusterId) };
+function generateSubcluster(id, label, clusterId) {
+    const subcluster = { id: parseInt(id), label, cluster_id: parseInt(clusterId) };
     // console.log("[INFO] Generating subcluster", subcluster);
     if (clusters.map(function (e) { return e.id; }).indexOf(subcluster.cluster_id) < 0) {
         console.warn("[WARNING] cluster not found");
@@ -52,11 +52,11 @@ fs.createReadStream(fileUrlToIntegrate)
         const typeData = element[0];
         switch (parseInt(typeData)) {
             case 0: //cluster
-                const cluster = generateCluster(element[1], element[2], element[3]);
+                const cluster = generateCluster(element[1], element[2]);
                 clusters.push(cluster);
                 break;
             case 1: //subcluster
-                const subcluster = generateSubcluster(element[1], element[2], element[3], element[4]);
+                const subcluster = generateSubcluster(element[1], element[2], element[3]);
                 subclusters.push(subcluster);
                 break;
             case 2: //rating

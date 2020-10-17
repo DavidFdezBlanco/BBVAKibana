@@ -4,7 +4,7 @@ const Cluster = models.Cluster;
 const saveCluster = async (clusters) => {
     console.log(`saving ${clusters.length} clusters`);
     try {
-        return await Cluster.bulkCreate(clusters, { updateOnDuplicate: ['label', 'words'] });
+        return await Cluster.bulkCreate(clusters, { updateOnDuplicate: ['label'] });
     } catch (e) {
         console.error(e);
     }

@@ -8,6 +8,10 @@ module.exports = {
             autoIncrement: true,
             allowNull: false,
         },
+        label: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
         cluster_id: {
             type: Sequelize.INTEGER,
             allowNull: true,
@@ -18,15 +22,7 @@ module.exports = {
                 },
                 key: 'id',
             },
-        },
-        label: {
-            type: Sequelize.STRING,
-            allowNull: true,
-        },
-        words: {
-            type: Sequelize.ARRAY(Sequelize.STRING),
-            allowNull: true,
-        },
+        }
     }),
     down: (queryInterface, Sequelize) => queryInterface.dropTable('subcluster'),
 };

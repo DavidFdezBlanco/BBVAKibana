@@ -12,7 +12,7 @@ module.exports = {
             allowNull: false,
         },
         comment: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING(1000),
             allowNull: true
         },
         date: {
@@ -30,6 +30,10 @@ module.exports = {
         country: {
             type: Sequelize.STRING,
             allowNull: true,
+        },
+        company: {
+            type: Sequelize.STRING,
+            allowNull: false,
         },
         cluster_id: {
             type: Sequelize.INTEGER,
