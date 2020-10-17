@@ -1,6 +1,6 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
-require('custom-env').env(process.env.NODE_ENV, '../');
+require('custom-env').env(process.env.NODE_ENV, './');
 
 const { mustBeLoggedIn } = require('./middleware/auth');
 
@@ -17,10 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const port = process.env.PORT || 3001;
 
 console.log(`Running on ${process.env.ENVIRONMENT} environment`);
-
-if (process.env.ENVIRONMENT === 'development') {
-    app.use('/', (req, res) => res.json({ message: 'You got lost?' }));
-}
 
 /*
     PRIVATE ROUTES UNDER /API

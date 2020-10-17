@@ -1,0 +1,9 @@
+version: '3'
+services:
+  bbvakibana:
+    image: hackathon/nodejs:latest
+    working_dir: /home/hackathon
+    ports:
+     - "3000:3000"
+    command: > 
+             bash -c "ls && npm run start"
