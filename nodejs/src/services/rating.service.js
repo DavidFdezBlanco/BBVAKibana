@@ -10,6 +10,16 @@ const saveRating = async (ratings) => {
     }
 };
 
+const getRatings = async (country, category, date_start, date_end) => {
+    try {
+        console.log("--> ", country, category, date_start, date_end);
+        const results = await Rating
+    } catch(e) {
+        console.error(e);
+    }
+};
+
 module.exports = {
-    saveRating
+    saveRating,
+    getRatings
 };

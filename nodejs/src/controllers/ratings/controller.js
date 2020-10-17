@@ -1,9 +1,18 @@
 
+const ratingService = require('../../services/rating.service');
 
-const home = (req, res) => {
-    return res.status(501).json({ message: 'Welcome to the API V1' });
+const getRatings = async (req, res) => {
+
+    const params = req.body;
+    const {
+        country, category, date_start, date_end
+    } = params;
+    const ratings = await ratingService.getRatings(country, category, date_start, date_end);
+
+    return res.status(200).json(ratings);
 };
 
+
 module.exports = {
-    home,
+    getRatings
 };

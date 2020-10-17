@@ -10,6 +10,22 @@ const saveSubcluster = async (subclusters) => {
     }
 };
 
+const getSubcategories = async () => {
+    try {
+        return await Subcluster.findAll({
+            order: ['cluster_id'],
+            attributes: ['id', 'label', 'words'],
+            include: [{
+                model: models.Cluster,
+                attributes: ['id', 'label']
+            }]
+        });
+    } catch (e) {
+        console.error(e)
+    }
+};
+
 module.exports = {
-    saveSubcluster
+    saveSubcluster,
+    getSubcategories
 };

@@ -5,11 +5,10 @@ require('custom-env').env(process.env.NODE_ENV, '../');
 const { mustBeLoggedIn } = require('./middleware/auth');
 
 const ratingsController = require('./controllers/ratings');
-const auth = require('./controllers/auth');
+const clusterController = require('./controllers/cluster');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 /*
     PUBLIC ROUTES
@@ -18,8 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const port = process.env.PORT || 3001;
 
 console.log(`Running on ${process.env.ENVIRONMENT} environment`);
-
-app.use('/auth', auth);
 
 if (process.env.ENVIRONMENT === 'development') {
     app.use('/', (req, res) => res.json({ message: 'You got lost?' }));
@@ -30,7 +27,8 @@ if (process.env.ENVIRONMENT === 'development') {
 */
 
 // app.use('/api', mustBeLoggedIn);
-app.use('/api/rating', ratingsController);
+app.use('/api/ratings', ratingsController);
+app.use('/api/cluster', clusterController);
 
 app.listen(port);
 
