@@ -6,22 +6,26 @@
   "scripts": {
     "start": "NODE_ENV=development node src/index.js",
     "local": "NODE_ENV=local nodemon src/index.js",
+    "local:integrate": "NODE_ENV=local nodemon src/integration/index.js",
     "test": "mocha test/**/*.spec.js",
     "migrate:local": "NODE_ENV=local npx sequelize-cli db:migrate",
     "migrate:dev": "NODE_ENV=development npx sequelize-cli db:migrate",
     "lint": "eslint ./src --fix",
     "reset:local": "NODE_ENV=local npx sequelize-cli db:migrate:undo:all && npm run migrate:local",
-    "reset:dev": "NODE_ENV=dev npx sequelize-cli db:migrate:undo:all && npm run migrate:dev"
+    "reset:dev": "NODE_ENV=development npx sequelize-cli db:migrate:undo:all && npm run migrate:dev",
+    "integrate": "NODE_ENV=local nodemon src/integration/index.js",
+    "integrate:dev": "NODE_ENV=development node src/integration/index.js"
   },
   "dependencies": {
     "@types/node": "13.7.6",
     "body-parser": "1.19.0",
     "crypto": "1.0.1",
     "crypto-js": "4.0.0",
+    "csv-parser": "2.3.3",
     "custom-env": "2.0.1",
     "express": "4.17.1",
     "jsonwebtoken": "8.5.1",
-    "pg": "7.12.0",
+    "pg": "8.0.1",
     "pg-hstore": "2.3.3",
     "sequelize": "5.12.1",
     "swagger-ui-express": "4.1.3"
