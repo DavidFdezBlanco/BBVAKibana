@@ -4,54 +4,54 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             primaryKey: true,
             autoIncrement: true,
-            allowNull: false
+            allowNull: false,
         },
-        punctuation:{
+        punctuation: {
             type: DataTypes.FLOAT,
-            allowNull: false
+            allowNull: false,
         },
         comment: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
         },
         date: {
             type: DataTypes.DATE,
-            allowNull: true
+            allowNull: true,
         },
         lat: {
             type: DataTypes.FLOAT,
-            allowNull: true
+            allowNull: true,
         },
         lng: {
             type: DataTypes.FLOAT,
-            allowNull: true
+            allowNull: true,
         },
         country: {
             type: DataTypes.STRING,
-            allowNull: true
-        }
+            allowNull: true,
+        },
     },
     {
         timestamps: false,
-        tableName: 'ratings'
+        tableName: 'ratings',
     });
-    Rating.associate = function(models) {
+    Rating.associate = function (models) {
         // associations can be defined here
-        Rating.belongsTo(models.Cluster,{
+        Rating.belongsTo(models.Cluster, {
             foreignKey: {
                 name: 'cluster_id',
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
-            targetKey: 'id'
+            targetKey: 'id',
         });
-        Rating.belongsTo(models.Subcluster,{
+        Rating.belongsTo(models.Subcluster, {
             foreignKey: {
                 name: 'subcluster_id',
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
-            targetKey: 'id'
+            targetKey: 'id',
         });
     };
     return Rating;

@@ -1,13 +1,12 @@
-'use strict';
+
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('subcluster', {
+    up: (queryInterface, Sequelize) => queryInterface.createTable('subcluster', {
         subcluster_id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-            allowNull: false
+            allowNull: false,
         },
         cluster_id: {
             type: Sequelize.INTEGER,
@@ -15,22 +14,19 @@ module.exports = {
             references: {
                 model: {
                     tableName: 'cluster',
-                    schema: 'public'
+                    schema: 'public',
                 },
-                key: 'id'
-            }
+                key: 'id',
+            },
         },
         label: {
             type: Sequelize.STRING,
-            allowNull: true
+            allowNull: true,
         },
         words: {
             type: Sequelize.ARRAY(Sequelize.STRING),
-            allowNull: true
-        }
-    });
-  },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('subcluster');
-  }
+            allowNull: true,
+        },
+    }),
+    down: (queryInterface, Sequelize) => queryInterface.dropTable('subcluster'),
 };

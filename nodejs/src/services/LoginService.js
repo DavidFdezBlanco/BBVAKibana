@@ -1,5 +1,5 @@
 const tokenService = require('./TokenService');
-const models = require("../database/models");
+const models = require('../database/models');
 const util = require('../util');
 const jwt = require('jsonwebtoken');
 
@@ -10,40 +10,28 @@ const jwt = require('jsonwebtoken');
  * @param {string} passwordNoHashed - password on the request
  */
 
-const getUserId =  async (username,passwordNoHashed) =>
-{
-    try{
+const getUserId = async (username, passwordNoHashed) => {
+    try {
         const auth = await models.User_conn.findOne(
             {
                 where:
                     {
-                        username: username
-                    }
+                        username,
+                    },
             });
-        if (auth)
-        {
-            console.log(auth.password)
+        if (auth) {
+            console.log(auth.password);
 
-            if (isValidUser(passwordNoHashed, auth.password, auth.salt))
-            {
+            if (isValidUser(passwordNoHashed, auth.password, auth.salt)) {
                 return auth.user_id;
             }
-            else
-            {
-                return new Error("Wrong username or Password");
-            }
+            return new Error('Wrong username or Password');
         }
-        else
-        {
-            return new Error("User not found");
-        }
-    }
-    catch (error)
-    {
+        return new Error('User not found');
+    } catch (error) {
         return new Error(error.message);
     }
-
-}
+};
 
 
 /**
@@ -52,15 +40,14 @@ const getUserId =  async (username,passwordNoHashed) =>
  * @param {string} passwordNoHashed - password on the request
  * @param {string} dbPassword - password from the database
  */
-function isValidUser(passwordNoHashed,dbPassword, salt) {
-    let passwordHashed = util.crip.saltHashPasswordWithSalt(passwordNoHashed,salt );
-    if (passwordHashed.passwordHash === dbPassword)
-    {
-        return true
+function isValidUser(passwordNoHashed, dbPassword, salt) {
+    const passwordHashed = util.crip.saltHashPasswordWithSalt(passwordNoHashed, salt);
+    if (passwordHashed.passwordHash === dbPassword) {
+        return true;
     }
-    return false
+    return false;
 }
 
 module.exports = {
-    getUserId
+    getUserId,
 };

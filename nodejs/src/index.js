@@ -1,10 +1,10 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
-require('custom-env').env(process.env.NODE_ENV);
+require('custom-env').env(process.env.NODE_ENV, '../');
 
 const { mustBeLoggedIn } = require('./middleware/auth');
 
-const homeController = require('./controllers/home');
+const ratingsController = require('./controllers/ratings');
 const auth = require('./controllers/auth');
 
 app.use(bodyParser.json());
@@ -15,14 +15,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
     PUBLIC ROUTES
  */
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
-console.log("Running on " + process.env.ENVIRONMENT + " env");
+console.log(`Running on ${process.env.ENVIRONMENT} environment`);
 
 app.use('/auth', auth);
 
 if (process.env.ENVIRONMENT === 'development') {
-    app.use('/', (req, res) => res.json({ message: "You got lost?" }));
+    app.use('/', (req, res) => res.json({ message: 'You got lost?' }));
 }
 
 /*
@@ -30,7 +30,7 @@ if (process.env.ENVIRONMENT === 'development') {
 */
 
 // app.use('/api', mustBeLoggedIn);
-app.use('/api', homeController);
+app.use('/api/rating', ratingsController);
 
 app.listen(port);
 

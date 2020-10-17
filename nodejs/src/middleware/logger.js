@@ -1,7 +1,6 @@
 const loggerMiddleware = (req, resp, next) => {
-
     console.log('Request logged:', req.method, req.path);
-    next()
+    next();
 };
 
-export default loggerMiddleware
+export default loggerMiddleware;

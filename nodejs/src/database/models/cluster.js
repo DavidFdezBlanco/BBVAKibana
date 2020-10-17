@@ -5,19 +5,19 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-            allowNull: false
+            allowNull: false,
         },
         label: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
         },
         words: {
             type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: true
-        }
+            allowNull: true,
+        },
     }, {
         timestamps: false,
-        tableName: 'cluster'
+        tableName: 'cluster',
     });
     return Cluster;
 };

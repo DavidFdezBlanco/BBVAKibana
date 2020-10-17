@@ -5,28 +5,28 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-            allowNull: false
+            allowNull: false,
         },
         label: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
         },
         words: {
             type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: true
-        }
+            allowNull: true,
+        },
     }, {
         timestamps: false,
-        tableName: 'subcluster'
+        tableName: 'subcluster',
     });
     Subcluster.associate = function (models) {
-        Subcluster.belongsTo(models.Cluster,{
+        Subcluster.belongsTo(models.Cluster, {
             foreignKey: {
                 name: 'cluster_id',
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: false,
             },
-            targetKey: 'id'
+            targetKey: 'id',
         });
     };
     return Subcluster;

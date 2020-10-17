@@ -1,5 +1,5 @@
 const util = require('../util');
-const models = require("../database/models");
+const models = require('../database/models');
 
 /**
  * Creates a new token
@@ -7,17 +7,16 @@ const models = require("../database/models");
  * @param {string} user_id - user_id retourned from the db request
  */
 
-const createToken =  async (user_id) =>
-{
+const createToken = async (user_id) => {
     try {
-        console.log("here")
+        console.log('here');
         newToken = util.token_manager.createToken(user_id);
-        console.log("new token" + newToken);
+        console.log(`new token${newToken}`);
         return instertToken(newToken, user_id);
-    }catch (error) {
-        throw new Error("Token creation error")
+    } catch (error) {
+        throw new Error('Token creation error');
     }
-}
+};
 
 /**
  * Creates a new token
@@ -27,25 +26,22 @@ const createToken =  async (user_id) =>
  */
 
 const instertToken = async (token, user_id) => {
-    try
-    {
+    try {
         tokenToCreate =
             {
-                "token": token,
-                "created_on": new Date(),
-                "user_id": user_id
+                token,
+                created_on: new Date(),
+                user_id,
             };
         console.log(tokenToCreate);
         const newToken = await models.Token.create(tokenToCreate);
         return newToken;
+    } catch (error) {
+        throw new Error('Token insertion error');
     }
-    catch (error)
-    {
-        throw new Error("Token insertion error")
-    }
-}
+};
 
 
 module.exports = {
-    createToken
-}
+    createToken,
+};

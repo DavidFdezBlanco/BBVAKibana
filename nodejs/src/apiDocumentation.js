@@ -8,31 +8,31 @@ module.exports = {
         contact: {
             name: 'Bitdistrict',
             email: 'alexalejandroem@gmail.com',
-            url: 'https://www.bitdistrict.com/'
+            url: 'https://www.bitdistrict.com/',
         },
         license: {
             name: 'Apache 2.0',
-            url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
-        }
+            url: 'https://www.apache.org/licenses/LICENSE-2.0.html',
+        },
     },
     servers: [
         {
             url: 'http://localhost:3000/',
-            description: 'Local server'
+            description: 'Local server',
         },
         {
             url: 'https://api_url_testing',
-            description: 'Testing server'
+            description: 'Testing server',
         },
         {
             url: 'https://api_url_production',
-            description: 'Production server'
-        }
+            description: 'Production server',
+        },
     ],
     security: [
         {
-            Bearer: []
-        }
+            Bearer: [],
+        },
     ],
     paths: {
         '/api': {
@@ -42,24 +42,24 @@ module.exports = {
                 operationId: 'home',
                 parameters: [],
                 responses: {
-                    '401': {
+                    401: {
                         description: 'Token was not found',
                         content: {
                             'application/json': {
-                                message: "Token not found"
-                            }
-                        }
+                                message: 'Token not found',
+                            },
+                        },
                     },
-                    '200': {
+                    200: {
                         description: 'Welcome endpoint succesfully reached',
                         content: {
                             'application/json': {
-                                message: 'Welcome to aplifit backend'
-                            }
-                        }
-                    }
-                }
-            }
+                                message: 'Welcome to aplifit backend',
+                            },
+                        },
+                    },
+                },
+            },
         },
         '/auth/login': {
             post: {
@@ -71,33 +71,33 @@ module.exports = {
                     content: {
                         'application/json': {
                             schema: {
-                                $ref: '#/components/schemas/User'
+                                $ref: '#/components/schemas/User',
                             },
                             example: {
                                 username: 'alejandroem',
-                                password: '123456'
-                            }
-                        }
+                                password: '123456',
+                            },
+                        },
                     },
-                    required: true
+                    required: true,
                 },
                 responses: {
-                    '401': {
-                        description: 'Invalid user'
+                    401: {
+                        description: 'Invalid user',
                     },
-                    '400': {
+                    400: {
                         description: 'Invalid parameters',
                         content: {
                             'application/json': {
                                 schema: {
-                                    $ref: '#/components/schemas/Login'
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+                                    $ref: '#/components/schemas/Login',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
     },
     components: {
         securitySchemes: {
@@ -105,48 +105,48 @@ module.exports = {
                 type: 'apiKey',
                 name: 'Authorization',
                 in: 'header',
-                bearerFormat: 'JWT'
+                bearerFormat: 'JWT',
             },
         },
         schemas: {
             username: {
                 type: 'string',
-                example: 'alejandroem'
+                example: 'alejandroem',
             },
             password: {
                 type: 'string',
-                example: '123456'
+                example: '123456',
             },
             User: {
                 type: 'object',
                 properties: {
                     username: {
-                        $ref: '#/components/schemas/username'
+                        $ref: '#/components/schemas/username',
                     },
                     password: {
-                        $ref: '#/components/schemas/password'
+                        $ref: '#/components/schemas/password',
                     },
-                }
+                },
             },
             Login: {
                 type: 'object',
                 properties: {
                     message: {
-                        type: 'string'
-                    }
-                }
+                        type: 'string',
+                    },
+                },
             },
             Error: {
                 type: 'object',
                 properties: {
                     message: {
-                        type: 'string'
+                        type: 'string',
                     },
                     internal_code: {
-                        type: 'string'
-                    }
-                }
-            }
-        }
-    }
+                        type: 'string',
+                    },
+                },
+            },
+        },
+    },
 };

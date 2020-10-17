@@ -5,15 +5,15 @@ module.exports = {
         'Tokens',
         [
             {
-                token: util.token_manager.createToken("1"),
-                created_on:  new Date(),
-                user_id: 1
+                token: util.token_manager.createToken('1'),
+                created_on: new Date(),
+                user_id: 1,
             },
             {
-                token: util.token_manager.createToken("2"),
-                created_on:  new Date(),
-                user_id: 2
-            }
+                token: util.token_manager.createToken('2'),
+                created_on: new Date(),
+                user_id: 2,
+            },
         ],
         {},
     ),
