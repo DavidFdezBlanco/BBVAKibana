@@ -1,6 +1,6 @@
 version: '3'
 services:
-  aplifit_nginx:
+  api_nginx:
     image: nginx
     env_file:
       - nginx.env 
