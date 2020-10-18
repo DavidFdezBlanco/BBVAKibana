@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a8d5ab97.chunk.css",
+    "main.js": "/static/js/main.344a5abf.chunk.js",
+    "main.js.map": "/static/js/main.344a5abf.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.43bfd64d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.43bfd64d.js.map",
+    "static/js/2.af6bf1b8.chunk.js": "/static/js/2.af6bf1b8.chunk.js",
+    "static/js/2.af6bf1b8.chunk.js.map": "/static/js/2.af6bf1b8.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.119ed9b66a425220b278678de4bf0699.js": "/precache-manifest.119ed9b66a425220b278678de4bf0699.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.a8d5ab97.chunk.css.map": "/static/css/main.a8d5ab97.chunk.css.map",
+    "static/js/2.af6bf1b8.chunk.js.LICENSE.txt": "/static/js/2.af6bf1b8.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/Poppins-Regular.731a28a4.ttf",
+    "static/media/SuperHappyFace.png": "/static/media/SuperHappyFace.920b37e2.png",
+    "static/media/bbva.png": "/static/media/bbva.e9206fbb.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.43bfd64d.js",
+    "static/js/2.af6bf1b8.chunk.js",
+    "static/css/main.a8d5ab97.chunk.css",
+    "static/js/main.344a5abf.chunk.js"
+  ]
+}

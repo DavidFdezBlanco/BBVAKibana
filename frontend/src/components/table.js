@@ -102,7 +102,7 @@ class Table extends Component {
         let cqt = Object.keys(this.finalObject.categories);
         return (
             <div className="limiter">
-                <div className="resultMean">Sector de Calificacion: <br></br>
+                <div className="resultMean">Nota media: <br></br>
                     {avg}
                 </div>
                 <div className="resultMean">Pais: <br></br>
@@ -116,7 +116,7 @@ class Table extends Component {
                                     Categoria
 							</div>
                                 <div className="cell">
-                                    Puntuaje
+                                    Puntuación
 							</div>
                                 <div className="cell">
                                     %
@@ -124,9 +124,7 @@ class Table extends Component {
                             </div>
                             {
                                 cqt.map((value, index) => {
-                                    var toReturn = <div className="row"><div className="cell" data-title="Categoria">{value}</div><div className="cell" data-title="Puntuaje"><img src={this.getFace(Number(this.finalObject.categories[value].rating).toFixed(0))} height="20px" width="20px" /></div><div className="cell" data-title="%">{this.finalObject.categories[value].rating.toFixed(2)}</div></div>
-
-                                    return toReturn
+                                    return <div className="row"><div className="cell" data-title="Categoria">{value}</div><div className="cell" data-title="Puntuaje"><img src={this.getFace(Number(this.finalObject.categories[value].rating).toFixed(0))} height="20px" width="20px" /></div><div className="cell" data-title="%">{this.finalObject.categories[value].rating.toFixed(2)}</div></div>
                                 })
                             }
 
