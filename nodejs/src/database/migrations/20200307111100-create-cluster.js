@@ -11,6 +11,10 @@ module.exports = {
         label: {
             type: Sequelize.STRING,
             allowNull: true,
+        },
+        words: {
+            type: Sequelize.STRING,
+            allowNull: true
         }
     }),
     down: (queryInterface, Sequelize) => queryInterface.dropTable('cluster'),

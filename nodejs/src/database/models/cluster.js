@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
         label: {
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        words: {
+            type: Sequelize.STRING,
+            allowNull: true
         }
     }, {
         timestamps: false,
