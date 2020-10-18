@@ -18,14 +18,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
             allowNull: true,
         },
-        lat: {
-            type: DataTypes.FLOAT,
-            allowNull: true,
-        },
-        lng: {
-            type: DataTypes.FLOAT,
-            allowNull: true,
-        },
+        // lat: {
+        //     type: DataTypes.FLOAT,
+        //     allowNull: true,
+        // },
+        // lng: {
+        //     type: DataTypes.FLOAT,
+        //     allowNull: true,
+        // },
         country: {
             type: DataTypes.STRING,
             allowNull: true,

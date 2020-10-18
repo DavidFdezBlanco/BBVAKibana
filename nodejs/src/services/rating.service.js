@@ -17,7 +17,7 @@ const saveRating = async (ratings) => {
 const getRatingsByCluster = async (clusters, country, clusterId, date_start, date_end) => {
     try {
         // const clusters = await clusterService.getCategories();
-        let query = "SELECT cluster_id, avg(punctuation) from public.ratings r WHERE country=:country";
+        let query = "SELECT cluster_id, avg(punctuation) from public.ratings r WHERE country=:country ";
         if (clusterId) query += ' AND cluster_id=:clusterId'
         if (date_start && date_end) {
             query += " AND date between :date_start and :date_end"
@@ -79,9 +79,34 @@ const getRatingsCount = async (clusters, country, clusterId, date_start, date_en
     }
 };
 
+const getRating = async (clusterIds) => {
+    try {
+        return await Rating.findOne({
+            where: {
+                cluster_id: clusterIds
+            },
+            order: models.sequelize.random()
+        });
+    } catch (e) {
+        console.error(e);
+    }
+};
 
+const updateRating = async (id, cluster_id) => {
+    try {
+        return await Rating.update({
+            cluster_id: cluster_id
+        }, {
+            where: { id: id }
+        });
+    } catch (e) {
+        console.error(e);
+    }
+};
 module.exports = {
     saveRating,
     getRatingsByCluster,
-    getRatingsCount
+    getRatingsCount,
+    updateRating,
+    getRating
 };

@@ -19,14 +19,14 @@ module.exports = {
             type: Sequelize.DATE,
             allowNull: true,
         },
-        lat: {
-            type: Sequelize.FLOAT,
-            allowNull: true,
-        },
-        lng: {
-            type: Sequelize.FLOAT,
-            allowNull: true,
-        },
+        // lat: {
+        //     type: Sequelize.FLOAT,
+        //     allowNull: true,
+        // },
+        // lng: {
+        //     type: Sequelize.FLOAT,
+        //     allowNull: true,
+        // },
         country: {
             type: Sequelize.STRING,
             allowNull: true,
