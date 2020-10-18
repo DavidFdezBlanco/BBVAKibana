@@ -1,1 +1,56 @@
-train page
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Formulario reviews</title>
+    <meta charset="utf-8">
+    <link href="Estilos/style.css" rel="stylesheet" type="text/css">
+    <script src="JavaScript/script.js"></script>
+    <!-- Nos aseguramos que el contenido se ajusta al ancho del dispositivo y que la escala min y max es 1 -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+</head>
+
+<body>
+
+    <div id="myForm">
+        <form action="ejemplo.php" method="get">
+            <p id="Categoria">Categoría: <input id="category" type="text" size="20" placeholder="Categoria" disabled>
+            </p>
+            &nbsp;
+            <p id="Reseña">Reseña: </p>
+            &nbsp;
+            <textarea id="review" name="texto" rows="4" cols="60" disabled></textarea>
+            &nbsp;
+
+            <p class="pregunta"> ¿Crees que la reseña está debidamente categorizada? </p>
+            &nbsp;
+            <p id="botones">
+                <input type="button" value="  Sí  " id="sibutton" onclick="siButton()">
+                <input type="button" value="  No  " id="nobutton" onclick="noButton()">
+            </p>
+            &nbsp;
+            <div id="div_pregunta" style="display:none;">
+                <p class="pregunta"> Si no lo crees, indique a continuación en qué categoría lo clasificarías:</p>
+                &nbsp;
+                <p class="pregunta">
+
+                    <select id="categoria_input">
+                        <option value="0">Atención al cliente</option>
+                        <option value="1">Cajeros</option>
+                        <option value="2">Esperas</option>
+                        <option value="3">Horarios</option>
+                        <option value="4">Operaciones Bancarias</option>
+                        <option value="5">Sucursal</option>
+                        <option value="6">Teléfonos</option>
+                    </select>
+
+                    <input type="submit" value="   Enviar  ">
+                </p>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+
+</html>
