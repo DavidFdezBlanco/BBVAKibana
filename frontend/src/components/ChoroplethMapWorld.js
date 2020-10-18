@@ -11,6 +11,27 @@ import SuperAngryFace from '../image/SuperAngryFace.png'
 
 class ChoroplethMap extends Component {
     componentDidMount() {
+        fetch("http://3.137.101.89:3000/api/ratings?country= Argentina")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log("result", result);
+                    this.setState({
+                        isLoaded: true,
+                        items: result.items
+                    });
+                },
+                // Nota: es importante manejar errores aquí y no en 
+                // un bloque catch() para que no interceptemos errores
+                // de errores reales en los componentes.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+
         // Datamaps expect data in format:
         // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
         //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
@@ -31,7 +52,7 @@ class ChoroplethMap extends Component {
 
 
 
-        function getFace(number){
+        function getFace(number) {
             switch (number) {
                 case 1:
                     return SuperHappyFace;
@@ -44,9 +65,9 @@ class ChoroplethMap extends Component {
                 case 5:
                     return SuperAngryFace;
                 default:
-                  //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
-                  break;
-              }
+                    //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
+                    break;
+            }
         }
 
         // fill dataset in appropriate format
@@ -62,7 +83,7 @@ class ChoroplethMap extends Component {
                 raAC = item[7],
                 raOP = item[8],
                 raLO = item[9];
-            dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value), covid: porCD, atencionCliente: porAC, operaciones: porOP, locales: porLO, ratingCD: raCD, ratingAC: raAC, ratingOP: raOP , ratingLO: raLO  };
+            dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value), covid: porCD, atencionCliente: porAC, operaciones: porOP, locales: porLO, ratingCD: raCD, ratingAC: raAC, ratingOP: raOP, ratingLO: raLO };
         });
 
         let map = new Datamap({
@@ -84,11 +105,11 @@ class ChoroplethMap extends Component {
                         '<table><thead><tr><th>Categoria</th>',
                         '<th >Puntuaje</th><th style="padding-left: 20px;">%</th>',
                         '</tr></thead><tbody><tr><th scope="row">COVID</th>',
-                        '<td><img src="', getFace(data.ratingCD), '" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.covid,  '</td></tr><tr><th scope="row">Atencion al Cliente</th>',
-                        '<td><img src="', getFace(data.ratingAC), '" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.atencionCliente,  '</td></tr><tr>',
+                        '<td><img src="', getFace(data.ratingCD), '" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.covid, '</td></tr><tr><th scope="row">Atencion al Cliente</th>',
+                        '<td><img src="', getFace(data.ratingAC), '" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.atencionCliente, '</td></tr><tr>',
                         '<th scope="row">Operaciones</th><td><img src="', getFace(data.ratingOP), '" height="12px" width="12px"/></td>',
-                        '<td style="padding-left: 20px;">', data.operaciones,  '</td></tr><tr><th scope="row">Locales</th>',
-                        '<td><img src="', getFace(data.ratingLO), '" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.locales,  '</td></tr>',
+                        '<td style="padding-left: 20px;">', data.operaciones, '</td></tr><tr><th scope="row">Locales</th>',
+                        '<td><img src="', getFace(data.ratingLO), '" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.locales, '</td></tr>',
                         '</tbody></table>',
                         '</div>'].join('');
                 }
