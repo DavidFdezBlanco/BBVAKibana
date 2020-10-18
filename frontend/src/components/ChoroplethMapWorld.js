@@ -99,16 +99,16 @@ class ChoroplethMap extends Component {
             .range(["#89D1F3", "#006EC1"]); // blue color
 
         function getFace(number) {
-            switch (number) {
-                case 1:
+            switch (Number(number)) {
+                case 5:
                     return SuperHappyFace;
-                case 2:
+                case 4:
                     return HappyFace;
                 case 3:
                     return NeutralFace;
-                case 4:
+                case 2:
                     return AngryFace;
-                case 5:
+                case 1:
                     return SuperAngryFace;
                 default:
                     //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
@@ -120,29 +120,9 @@ class ChoroplethMap extends Component {
         await this.fetchData();
         // fill dataset in appropriate format
         this.state.data.forEach(function (item) {
-            // {
-            //     code: 'ARG',
-            //     name: 'Argentina',
-            //     avg: 3.2,
-            //     categories: {
-            //         "Atencion al cliente": {
-            //             rating: 3,
-            //             avg: 54
-            //         }
-            //     }
-            // }
-            console.log('jjj',item)
-            // item example value ["USA", 70]
-            let iso = item.code,
-                value = item.avg;
-                // porCD = item[2],
-                // porAC = item[3],
-                // porOP = item[4],
-                // porLO = item[5],
-                // raCD = item[6],
-                // raAC = item[7],
-                // raOP = item[8],
-                // raLO = item[9];
+            let iso = item.code;
+            let value = item.avg;
+
             dataset[iso] = { 
                 numberOfThings: value, 
                 fillColor: paletteScale(value), 
@@ -171,14 +151,14 @@ class ChoroplethMap extends Component {
                         '<th>Puntuaje</th><th style="padding-left: 20px;">%</th>',
                         '</tr></thead>',
                         '<tbody>',
-                        '<tr><th scope="row">Atención al cliente</th>','<td><img src="', getFace(data.categories['Atención al cliente'].rating),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.covid, '</td>',
-                        '<tr><th scope="row">Cajeros</th>','<td><img src="', getFace(data.ratingCD),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.covid, '</td>',
-                        '<tr><th scope="row">Esperas</th>','<td><img src="', getFace(data.ratingCD),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.covid, '</td>',
-                        '<tr><th scope="row">Horarios</th>','<td><img src="', getFace(data.ratingCD),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.covid, '</td>',
-                        '<tr><th scope="row">Operaciones Bancarias</th>','<td><img src="', getFace(data.ratingCD),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.covid, '</td>',
-                        '<tr><th scope="row">Sucursal</th>','<td><img src="', getFace(data.ratingCD),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.covid, '</td>',
-                        '<tr><th scope="row">Teléfonos</th>','<td><img src="', getFace(data.ratingCD),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.covid, '</td>',
-                        '<tr><th scope="row">Unclassified</th>','<td><img src="', getFace(data.ratingCD),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', data.covid, '</td>',
+                        '<tr><th scope="row">Atención al cliente</th>','<td><img src="', getFace(Number(data.categories['Atención al cliente'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Atención al cliente'].avg * 100).toFixed(0), '</td>',
+                        '<tr><th scope="row">Cajeros</th>','<td><img src="', getFace(Number(data.categories['Cajeros'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Cajeros'].avg * 100).toFixed(0), '</td>',
+                        '<tr><th scope="row">Esperas</th>','<td><img src="', getFace(Number(data.categories['Esperas'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Esperas'].avg * 100).toFixed(0), '</td>',
+                        '<tr><th scope="row">Horarios</th>','<td><img src="', getFace(Number(data.categories['Horarios'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Horarios'].avg * 100).toFixed(0), '</td>',
+                        '<tr><th scope="row">Operaciones Bancarias</th>','<td><img src="', getFace(Number(data.categories['Operaciones Bancarias'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Operaciones Bancarias'].avg * 100).toFixed(0), '</td>',
+                        '<tr><th scope="row">Sucursal</th>','<td><img src="', getFace(Number(data.categories['Sucursal'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Sucursal'].avg * 100).toFixed(0), '</td>',
+                        '<tr><th scope="row">Teléfonos</th>','<td><img src="', getFace(Number(data.categories['Teléfonos'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Teléfonos'].avg * 100).toFixed(0), '</td>',
+                        '<tr><th scope="row">Unclassified</th>','<td><img src="', getFace(Number(data.categories['Unclassified'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Unclassified'].avg * 100).toFixed(0), '</td>',
                         '</tbody></table>',
                         '</div>'].join('');
                 }
