@@ -20,7 +20,21 @@ const getCategories = async () => {
     }
 };
 
+const getIdsByLabel = async (label) => {
+    try {
+        return await Cluster.findAll({
+            where: {
+                label: label
+            },
+            attributes: ['id']
+        });
+    } catch (e) {
+        console.error(e);
+    }
+};
+
 module.exports = {
     saveCluster,
-    getCategories
+    getCategories,
+    getIdsByLabel
 };

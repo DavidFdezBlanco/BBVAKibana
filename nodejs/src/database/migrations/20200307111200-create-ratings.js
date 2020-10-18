@@ -19,14 +19,14 @@ module.exports = {
             type: Sequelize.DATE,
             allowNull: true,
         },
-        lat: {
-            type: Sequelize.FLOAT,
-            allowNull: true,
-        },
-        lng: {
-            type: Sequelize.FLOAT,
-            allowNull: true,
-        },
+        // lat: {
+        //     type: Sequelize.FLOAT,
+        //     allowNull: true,
+        // },
+        // lng: {
+        //     type: Sequelize.FLOAT,
+        //     allowNull: true,
+        // },
         country: {
             type: Sequelize.STRING,
             allowNull: true,
@@ -48,7 +48,7 @@ module.exports = {
         },
         subcluster_id: {
             type: Sequelize.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: {
                     tableName: 'subcluster',
