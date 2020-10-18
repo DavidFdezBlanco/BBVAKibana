@@ -18,7 +18,6 @@ class App extends Component {
             <div className='App-map'>
             <ChoroplethMap/>
             </div>
-        
             <div className='interactive-table'>
                 <Table/>
             </div>

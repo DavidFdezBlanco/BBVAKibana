@@ -46,12 +46,10 @@ class ChoroplethMap extends Component {
         let i = 0;
         return new Promise((res,rej) => {
             this.countryCodes.forEach(country => {
-                console.log("country", country.name);
                 fetch("http://3.137.101.89:3000/api/ratings?country=" + country.name)
                     .then(res => res.json())
                     .then(
                         (result) => {
-                            console.log("result", result);
                             let clusterAvg = result.cluster_avg;
                             let globalSum = 0;
                             for (const category in clusterAvg) {
@@ -116,7 +114,6 @@ class ChoroplethMap extends Component {
             }
         }
 
-        console.log('hola', this.props.data);
         await this.fetchData();
         // fill dataset in appropriate format
         this.state.data.forEach(function (item) {
