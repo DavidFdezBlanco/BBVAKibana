@@ -103,10 +103,27 @@ const updateRating = async (id, cluster_id) => {
         console.error(e);
     }
 };
+
+const getAvailableCountries = async () => {
+    try {
+        // const clusters = await clusterService.getCategories();
+        let query = "SELECT distinct country from public.ratings";
+        const countResults = await await models.sequelize.query(
+            query,
+            {
+                type: QueryTypes.SELECT,
+            },
+        );
+        return countResults;
+    } catch (e) {
+        console.error(e);
+    }
+};
 module.exports = {
     saveRating,
     getRatingsByCluster,
     getRatingsCount,
     updateRating,
-    getRating
+    getRating,
+    getAvailableCountries
 };
