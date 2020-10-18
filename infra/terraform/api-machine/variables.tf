@@ -7,13 +7,13 @@
 variable "AWS_ACCESS_KEY_ID" {
   description = "AWS access ID"
   type        = string
-  default = "AKIAUYY4GUNV5XKL7IXI"
+  default = "AKIAUYY4GUNVS62RQKOI"
 }
 
 variable "AWS_SECRET_ACCESS_KEY" {
   description = "AWS access key password"
   type        = string
-  default = "SY0YkhgIiYkAOMhpf8TpR9y/hqmSt/12HTa137pg"
+  default = "DFmOAQHGuw/ZvkwOFA3lfzMPoTUdbDa+0gRNtTFp"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
