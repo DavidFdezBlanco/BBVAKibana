@@ -11,27 +11,6 @@ import SuperAngryFace from '../image/SuperAngryFace.png'
 
 class ChoroplethMap extends Component {
     componentDidMount() {
-        fetch("http://3.137.101.89:3000/api/ratings?country= Argentina")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log("result", result);
-                    this.setState({
-                        isLoaded: true,
-                        items: result.items
-                    });
-                },
-                // Nota: es importante manejar errores aquí y no en 
-                // un bloque catch() para que no interceptemos errores
-                // de errores reales en los componentes.
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
-
         // Datamaps expect data in format:
         // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
         //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
@@ -49,8 +28,6 @@ class ChoroplethMap extends Component {
         let paletteScale = d3.scale.linear()
             .domain([minValue, maxValue])
             .range(["#89D1F3", "#006EC1"]); // blue color
-
-
 
         function getFace(number) {
             switch (number) {

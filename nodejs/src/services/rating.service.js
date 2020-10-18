@@ -31,12 +31,19 @@ const getRatingsByCluster = async (clusters, country, clusterId, date_start, dat
             },
         );
         let results = {};
+        let labels = {};
         for (const cluster in clusters) {
             if (clusters.hasOwnProperty(cluster)) {
                 const element = clusters[cluster];
-                console.log(element.toJSON());
                 const label = element.get('label');
-                results[label] = avgResults.find((x) => x.cluster_id == element.get('id')) != undefined ? avgResults.find((x) => x.cluster_id == element.get('id')).avg : 0;
+                //TODO: Refactor
+                if (labels[label]) {
+                    labels[label] = true;
+                    let avg = avgResults.find((x) => x.cluster_id == element.get('id')) != undefined ? avgResults.find((x) => x.cluster_id == element.get('id')).avg : 0;
+                    results[label] = (results[label] + avg ) / 2;
+                } else {
+                    results[label] = avgResults.find((x) => x.cluster_id == element.get('id')) != undefined ? avgResults.find((x) => x.cluster_id == element.get('id')).avg : 0;
+                }
             }
         }
         return results;
@@ -66,7 +73,6 @@ const getRatingsCount = async (clusters, country, clusterId, date_start, date_en
         for (const cluster in clusters) {
             if (clusters.hasOwnProperty(cluster)) {
                 const element = clusters[cluster];
-                console.log(element.toJSON());
                 const label = element.get('label');
                 const count = countResults.find((x) => x.cluster_id == element.get('id')) != undefined ? countResults.find((x) => x.cluster_id == element.get('id')).count : 0;
                 results[label] = parseInt(count);
