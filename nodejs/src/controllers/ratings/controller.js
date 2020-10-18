@@ -56,8 +56,21 @@ const updateComment = async (req, res) => {
     return res.status(200).json(rating);
 };
 
+const getCountries = async (req, res) => {
+    const countries = await ratingService.getAvailableCountries();
+    const stringCountries = [];
+    for (const country in countries) {
+        if (countries.hasOwnProperty(country)) {
+            const element = countries[country];
+            stringCountries.push(element.country);
+        }
+    }
+    return res.status(200).json(stringCountries);
+};
+
 module.exports = {
     getRatings,
     getComment,
-    updateComment
+    updateComment,
+    getCountries
 };

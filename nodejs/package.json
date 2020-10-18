@@ -6,6 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=development node src/index.js",
     "local": "NODE_ENV=local nodemon src/index.js",
+    "dev": "NODE_ENV=development nodemon src/index.js",
     "local:integrate": "NODE_ENV=local nodemon src/integration/index.js",
     "test": "mocha test/**/*.spec.js",
     "migrate:local": "NODE_ENV=local npx sequelize-cli db:migrate",
@@ -21,6 +22,7 @@
     "body-parser": "1.19.0",
     "crypto": "1.0.1",
     "crypto-js": "4.0.0",
+    "cors": "2.8.5",
     "csv-parser": "2.3.3",
     "custom-env": "2.0.1",
     "express": "4.17.1",
