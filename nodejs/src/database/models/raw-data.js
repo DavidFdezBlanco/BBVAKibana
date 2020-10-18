@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         comment: {
-            type: DataTypes.STRING(1000),
+            type: DataTypes.STRING(100000),
             allowNull: false,
         },
         relative_date: {
@@ -39,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        country: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     }, {
         timestamps: false,
         tableName: 'rawdata',

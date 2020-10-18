@@ -39,6 +39,10 @@ module.exports = {
             type: Sequelize.STRING,
             allowNull: false,
         },
+        country: {
+            type: Sequelize.STRING,
+            allowNull: true
+        }
     }),
     down: (queryInterface, Sequelize) => queryInterface.dropTable('rawdata'),
 };
