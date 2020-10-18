@@ -124,9 +124,9 @@ class Table extends Component {
                 <div className="resultMean">Nota media: <br></br>
                     {avg}
                 </div>
-                <div className="resultMean">País: <br></br>
+                {/* <div className="resultMean">País: <br></br>
                     {country}
-                </div>
+                </div> */}
                 <div className="selector-wrapper">
                     <Select
                         className="selector"
