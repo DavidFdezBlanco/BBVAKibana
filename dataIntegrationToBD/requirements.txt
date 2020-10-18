@@ -1,0 +1,3 @@
+pip3 install pygresql
+pip3 install psycopg2
+apt-get install libpq-dev
