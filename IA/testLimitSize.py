@@ -101,22 +101,21 @@ treated['caption_cleaned'] = treated['caption_cleaned'].apply(removeStopWords)
 
 vectorizer = TfidfVectorizer(strip_accents='unicode', analyzer='word', ngram_range=(1,3), norm='l2')
 #fit = vectorizer.fit(treated['caption_cleaned'])
-train, test = train_test_split(treated, random_state=72, test_size=0.004, shuffle=True)
+train, test = train_test_split(treated, random_state=2, test_size=0.004, shuffle=True)
 X = vectorizer.fit_transform(train['caption_cleaned'])
 
 true_k = 12
-model = KMeans(n_clusters=true_k, init='k-means++', max_iter=100, n_init=1)
+model = KMeans(n_clusters=true_k, init='k-means++', max_iter=50, n_init=1)
 model.fit(X)
 
 print("Top terms per cluster:")
 order_centroids = model.cluster_centers_.argsort()[:, ::-1]
 terms = vectorizer.get_feature_names()
-for i in range(true_k):
-    print("Cluster %d:" % i),
-    for ind in order_centroids[i, :10]:
-        print(' %s' % terms[ind]),
-    print
-
+# for i in range(true_k):
+#     print("Cluster %d:" % i),
+#     for ind in order_centroids[i, :10]:
+#         print(' %s' % terms[ind]),
+#     print
 
 print("\n")
 print("Prediction")
@@ -128,6 +127,8 @@ prediction = model.predict(Y)
 for it in range(0,true_k):
     print("*****************")
     print("Cluster" + str(it))
+    for ind in order_centroids[it, :10]:
+        print(' %s' % terms[ind]),
     i = 0
     for index,row in test.iterrows():
         if(prediction[i]==it):
@@ -136,5 +137,5 @@ for it in range(0,true_k):
 
 print('saving model')
 
-pickle.dump(vectorizer, open("./model/vectorizer.pickle", "wb"))
-pickle.dump(model, open("./model/model.pickle", "wb"))
+pickle.dump(vectorizer, open("model/vectorizer.pickle", "wb"))
+pickle.dump(model, open("model/model.pickle", "wb"))
