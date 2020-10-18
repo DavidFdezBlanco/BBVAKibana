@@ -89,6 +89,7 @@ window.addEventListener( "load", function () {
   
       sendData();
       document.getElementById("div_pregunta").style.display = "none";
+      fetchData();
     } );
 
     
