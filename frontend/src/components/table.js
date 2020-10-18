@@ -7,6 +7,12 @@ import SuperAngryFace from '../image/SuperAngryFace.png'
 
 class Table extends Component {
 
+  state = {
+    data: []
+  }
+
+  countryList = ["Colombia","España", "Peru", "Argentina", "Mexico"]
+
   getFace(number){
     switch (Number(number)) {
         case 5:
@@ -25,42 +31,108 @@ class Table extends Component {
           break;
       }
   }
-  render() {
 
-    //neededInputs
-    const country = "Colombia"
-    const data = {"cluster_avg":{"Atención al cliente":1.8722222222222222,"Cajeros":2.0970149253731343,"Esperas":1.3267326732673268,"Horarios":1.0757575757575757,"Operaciones Bancarias":1.3831775700934579,"Sucursal":1.610655737704918,"Teléfonos":1.1958762886597938,"Unclassified":2.2618556701030927},"comments_count":{"results":{"Atención al cliente":180,"Cajeros":134,"Esperas":202,"Horarios":66,"Operaciones Bancarias":214,"Sucursal":244,"Teléfonos":97,"Unclassified":485},"total":1908}} 
-        
-    const itemsFinal = []
-    let clusterAvg = data.cluster_avg;
-
-    for (const category in data.cluster_avg){
-      if (clusterAvg.hasOwnProperty(category)) {
-        const element = clusterAvg[category];
-        const face = this.getFace(element.toFixed(0))
-        var obj={
-          category,
-          face,
-          element
-        }
-        itemsFinal.push(obj)
-      }
-    }
-    
-    //callc average
-    let globalSum = 0;
+  createData( name, avg, clusterAvg, commentcounts) {
+    let categories = {};
     for (const category in clusterAvg) {
         if (clusterAvg.hasOwnProperty(category)) {
-            const element = clusterAvg[category];
-            globalSum += element
+            categories[category] = {
+                rating: clusterAvg[category],
+                avg: commentcounts.results[category] / commentcounts.total
+            }
         }
     }
-    let avg = globalSum / Object.keys(clusterAvg).length;
+    return {
+        name: name,
+        avg: avg.toFixed(0),
+        categories: categories
+    };
+}
 
+  fetchData() {
+    let clusters = []
+    let i = 0;
+    return new Promise((res,rej) => {
+        this.countryList.forEach(country => {
+            console.log("country", country);
+            fetch("http://3.137.101.89:3000/api/ratings?country=" + country)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        console.log("result", result);
+                        let clusterAvg = result.cluster_avg;
+                        let globalSum = 0;
+                        for (const category in clusterAvg) {
+                            if (clusterAvg.hasOwnProperty(category)) {
+                                const element = clusterAvg[category];
+                                globalSum += element
+                            }
+                        }
+                        let avg = globalSum / Object.keys(clusterAvg).length;
+                        clusters.push(this.createData(country, avg, result.cluster_avg, result.comments_count))
+                        this.setState({
+                            data: this.state.data.concat([this.createData(country, avg, result.cluster_avg, result.comments_count)])
+                        });
+                        i++;
+                        if (i == 5) {
+                            res(true);
+                        }
+                    },
+                    (error) => {
+                        this.setState({});
+                    }
+                );
+        });
+    });
+}
+async componentDidMount() {
+    await this.fetchData();
+    console.log("fddfd",this.state.data)
+    // const itemsFinal = []
+    // let clusterAvg = this.state.data;
+    // console.log("here")
+    // for (const id in this.state.data){
+    //   console.log(this.state.data[id])
+    //   if (this.state.data[id].hasOwnProperty(id)) {
+    //     const element = clusterAvg[id];
+        
+
+
+    //     const face = this.getFace(element.toFixed(0))
+    //     var obj={
+    //       // country,
+    //       {// category,
+    //       face,
+    //       element
+    //     }  
+    //     }
+    //     itemsFinal.push(obj)
+    //   }
+    // }
+}
+  render() {
+
+    if(this.state.data.length<5){
+      return null
+    }
+
+    //hacer con select
+    var country = this.countryList[0]
+    console.log("geee")
+    console.log(this.state.data)
+    for( const i in this.state.data){
+      console.log(this.state.data[i])
+      if(this.state.data[i].name == country){
+        var avg = this.state.data[i].avg
+        this.finalObject =this.state.data[i]
+      }
+    }
+    let cqt = Object.keys(this.finalObject.categories);
+    console.log('grgrgr', this.finalObject.categories)
     return ( 
   <div className="limiter">
     <div className="resultMean">Sector de Calificacion: <br></br>
-    {avg.toFixed(2)}
+    {avg}
     </div>
     <div className="resultMean">Pais: <br></br>
     {country}
@@ -79,18 +151,14 @@ class Table extends Component {
 								%
 							</div>
 						</div>
-
-      
             {
-            
-            itemsFinal.map((value, index) => {
-              
-                var toReturn = <div className="row"><div className="cell" data-title="Categoria">{value.category}</div><div className="cell" data-title="Puntuaje"><img src={value.face} height="12px" width="12px"/></div><div className="cell" data-title="%">{value.element.toFixed(2)}</div></div>
+            cqt.map((value, index) => {
+              console.log('ddd',this.finalObject)
+              var toReturn = <div className="row"><div className="cell" data-title="Categoria">{value}</div><div className="cell" data-title="Puntuaje"><img src={this.getFace(Number(this.finalObject.categories[value].rating).toFixed(0))} height="20px" width="20px"/></div><div className="cell" data-title="%">{this.finalObject.categories[value].rating.toFixed(2)}</div></div>
 
-                return toReturn
-              })
-              
-              }
+              return toReturn
+            }) 
+            }
 
 					</div>
 			</div>
