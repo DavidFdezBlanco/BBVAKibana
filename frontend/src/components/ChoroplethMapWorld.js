@@ -36,7 +36,7 @@ class ChoroplethMap extends Component {
         return {
             code: code,
             name: name,
-            avg: avg.toFixed(0),
+            avg: avg.toFixed(2),
             categories: categories
         };
     }
@@ -119,7 +119,7 @@ class ChoroplethMap extends Component {
         this.state.data.forEach(function (item) {
             let iso = item.code;
             let value = item.avg;
-
+            console.log("VAl", value)
             dataset[iso] = { 
                 numberOfThings: value, 
                 fillColor: paletteScale(value), 

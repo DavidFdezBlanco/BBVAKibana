@@ -27,7 +27,7 @@ class Table extends Component {
     handleChange = selectedOption => {
         this.setState(
             { data: this.state.data, selectedOption, country: selectedOption.value },
-            () => console.log(`Option selected:`, this.state.selectedOption)
+            () => {}
         );
     };
 
@@ -62,7 +62,7 @@ class Table extends Component {
         }
         return {
             name: name,
-            avg: avg.toFixed(0),
+            avg: avg.toFixed(2),
             categories: categories
         };
     }
