@@ -122,7 +122,7 @@ class Table extends Component {
         return (
             <div className="limiter">
                 <div className="resultMean">Nota media: <br></br>
-                    {avg}
+                    {avg} / 5
                 </div>
                 {/* <div className="resultMean">País: <br></br>
                     {country}
@@ -153,7 +153,7 @@ class Table extends Component {
                             {
                                 cqt.map((value, index) => {
                                     if (value === 'Unclassified') return null;
-                                    return <div className="row"><div className="cell" data-title="Categoría">{value}</div><div className="cell" data-title="Puntuaje"><img src={this.getFace(Number(this.finalObject.categories[value].rating).toFixed(0))} height="20px" width="20px" /></div><div className="cell" data-title="%">{this.finalObject.categories[value].rating.toFixed(2)}</div></div>
+                                    return <div className="row"><div className="cell" data-title="Categoría">{value}</div><div className="cell" data-title="Puntuaje"><img src={this.getFace(Number(this.finalObject.categories[value].rating).toFixed(0))} height="20px" width="20px" /></div><div className="cell" data-title="%">{this.finalObject.categories[value].rating.toFixed(2)} / 5</div></div>
                                 })
                             }
 

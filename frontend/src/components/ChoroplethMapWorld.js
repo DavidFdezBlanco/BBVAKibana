@@ -142,19 +142,19 @@ class ChoroplethMap extends Component {
                     if (!data) { return; }
                     // tooltip content
                     return ['<div class="hoverinfo">',
-                        '<strong style="color: #016ec1;">', geo.properties.name, '</strong><br><strong>Nota media: ', data.numberOfThings, '</strong>',
+                        '<strong style="color: #016ec1;">', geo.properties.name, '</strong><br><strong>Nota media: ', data.numberOfThings, ' / 5</strong>',
                         '<table><thead><tr><th>Categoria</th>',
                         '<th>Puntuaje</th><th style="padding-left: 20px;">Distribución</th>',
                         '</tr></thead>',
                         '<tbody>',
-                        '<tr><th scope="row">Atención al cliente</th>','<td><img src="', getFace(Number(data.categories['Atención al cliente'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Atención al cliente'].avg * 100).toFixed(0), '</td>',
-                        '<tr><th scope="row">Cajeros</th>','<td><img src="', getFace(Number(data.categories['Cajeros'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Cajeros'].avg * 100).toFixed(0), '</td>',
-                        '<tr><th scope="row">Esperas</th>','<td><img src="', getFace(Number(data.categories['Esperas'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Esperas'].avg * 100).toFixed(0), '</td>',
-                        '<tr><th scope="row">Horarios</th>','<td><img src="', getFace(Number(data.categories['Horarios'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Horarios'].avg * 100).toFixed(0), '</td>',
-                        '<tr><th scope="row">Operaciones Bancarias</th>','<td><img src="', getFace(Number(data.categories['Operaciones Bancarias'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Operaciones Bancarias'].avg * 100).toFixed(0), '</td>',
-                        '<tr><th scope="row">Sucursal</th>','<td><img src="', getFace(Number(data.categories['Sucursal'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Sucursal'].avg * 100).toFixed(0), '</td>',
-                        '<tr><th scope="row">Teléfonos</th>','<td><img src="', getFace(Number(data.categories['Teléfonos'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Teléfonos'].avg * 100).toFixed(0), '</td>',
-                        '<tr><th scope="row">Sin clasificar</th>','<td><img src="', getFace(Number(data.categories['Unclassified'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Unclassified'].avg * 100).toFixed(0), '</td>',
+                        '<tr><th scope="row">Atención al cliente</th>','<td><img src="', getFace(Number(data.categories['Atención al cliente'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Atención al cliente'].avg * 100).toFixed(0), ' %</td>',
+                        '<tr><th scope="row">Cajeros</th>','<td><img src="', getFace(Number(data.categories['Cajeros'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Cajeros'].avg * 100).toFixed(0), ' %</td>',
+                        '<tr><th scope="row">Esperas</th>','<td><img src="', getFace(Number(data.categories['Esperas'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Esperas'].avg * 100).toFixed(0), ' %</td>',
+                        '<tr><th scope="row">Horarios</th>','<td><img src="', getFace(Number(data.categories['Horarios'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Horarios'].avg * 100).toFixed(0), ' %</td>',
+                        '<tr><th scope="row">Operaciones Bancarias</th>','<td><img src="', getFace(Number(data.categories['Operaciones Bancarias'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Operaciones Bancarias'].avg * 100).toFixed(0), ' %</td>',
+                        '<tr><th scope="row">Sucursal</th>','<td><img src="', getFace(Number(data.categories['Sucursal'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Sucursal'].avg * 100).toFixed(0), ' %</td>',
+                        '<tr><th scope="row">Teléfonos</th>','<td><img src="', getFace(Number(data.categories['Teléfonos'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Teléfonos'].avg * 100).toFixed(0), ' %</td>',
+                        '<tr><th scope="row">Sin clasificar</th>','<td><img src="', getFace(Number(data.categories['Unclassified'].rating).toFixed(0)),'" height="12px" width="12px"/></td><td style="padding-left: 20px;">', Number(data.categories['Unclassified'].avg * 100).toFixed(0), ' %</td>',
                         '</tbody></table>',
                         '</div>'].join('');
                 }
