@@ -5,13 +5,31 @@ import NeutralFace from '../image/NeutralFace.png'
 import AngryFace from '../image/AngryFace.png'
 import SuperAngryFace from '../image/SuperAngryFace.png'
 
+import Select from 'react-select';
+
+const options = [
+    { value: 'Colombia', label: 'Colombia' },
+    { value: 'España', label: 'España' },
+    { value: 'Peru', label: 'Peru' },
+    { value: 'Argentina', label: 'Argentina' },
+    { value: 'Mexico', label: 'Mexico' },
+];
+
 class Table extends Component {
 
     state = {
-        data: []
+        data: [],
+        country: 'España'
     }
 
     countryList = ["Colombia", "España", "Peru", "Argentina", "Mexico"]
+
+    handleChange = selectedOption => {
+        this.setState(
+            { data: this.state.data, selectedOption, country: selectedOption.value },
+            () => console.log(`Option selected:`, this.state.selectedOption)
+        );
+    };
 
     getFace(number) {
         switch (Number(number)) {
@@ -87,12 +105,13 @@ class Table extends Component {
         await this.fetchData();
     }
     render() {
+
         if (this.state.data.length < 5) {
             return null
         }
 
         //hacer con select
-        var country = this.countryList[0]
+        var country = this.state.country;
         for (const i in this.state.data) {
             if (this.state.data[i].name == country) {
                 var avg = this.state.data[i].avg
@@ -105,26 +124,36 @@ class Table extends Component {
                 <div className="resultMean">Nota media: <br></br>
                     {avg}
                 </div>
-                <div className="resultMean">Pais: <br></br>
+                <div className="resultMean">País: <br></br>
                     {country}
+                </div>
+                <div className="selector-wrapper">
+                    <Select
+                        className="selector"
+                        defaultValue={options[1]}
+                        value={this.state.selectedOption}
+                        onChange={this.handleChange}
+                        options={options}
+                    />
                 </div>
                 <div className="container-table100">
                     <div className="wrap-table100">
                         <div className="table">
                             <div className="row header">
                                 <div className="cell">
-                                    Categoria
+                                    Categoría
 							</div>
                                 <div className="cell">
-                                    Puntuación
-							</div>
+                                    Satisfacción
+							    </div>
                                 <div className="cell">
-                                    %
-							</div>
+                                    Nota media
+							    </div>
                             </div>
                             {
                                 cqt.map((value, index) => {
-                                    return <div className="row"><div className="cell" data-title="Categoria">{value}</div><div className="cell" data-title="Puntuaje"><img src={this.getFace(Number(this.finalObject.categories[value].rating).toFixed(0))} height="20px" width="20px" /></div><div className="cell" data-title="%">{this.finalObject.categories[value].rating.toFixed(2)}</div></div>
+                                    if (value === 'Unclassified') return null;
+                                    return <div className="row"><div className="cell" data-title="Categoría">{value}</div><div className="cell" data-title="Puntuaje"><img src={this.getFace(Number(this.finalObject.categories[value].rating).toFixed(0))} height="20px" width="20px" /></div><div className="cell" data-title="%">{this.finalObject.categories[value].rating.toFixed(2)}</div></div>
                                 })
                             }
 

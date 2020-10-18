@@ -183,6 +183,15 @@
   background-color: #ececff;
   cursor: pointer;
 }
+.selector {
+  width: 250px;
+  /* padding-left: 20em; */
+}
+.selector-wrapper {
+  align-items: center;
+  padding-left: 20%;
+  background-color: white;
+}
 
 @media (max-width: 768px) {
   .row {

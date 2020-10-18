@@ -1033,7 +1033,7 @@
                 {
                     "type": "Polygon",
                     "properties": {
-                        "name": "Spain"
+                        "name": "España"
                     },
                     "id": "ESP",
                     "arcs": [
@@ -2349,7 +2349,7 @@
                 {
                     "type": "Polygon",
                     "properties": {
-                        "name": "Peru"
+                        "name": "Perú"
                     },
                     "id": "PER",
                     "arcs": [
