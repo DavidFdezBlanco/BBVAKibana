@@ -142,11 +142,10 @@ class ChoroplethMap extends Component {
                 dataJson: WorldJson,
                 popupTemplate: function (geo, data) {
                     // don't show tooltip if country don't present in dataset
-                    console.log('hola', data);
                     if (!data) { return; }
                     // tooltip content
                     return ['<div class="hoverinfo">',
-                        '<strong style="color: #016ec1;">', geo.properties.name, '</strong><br><strong>', data.numberOfThings, '</strong>',
+                        '<strong style="color: #016ec1;">', geo.properties.name, '</strong><br><strong>Nota media: ', data.numberOfThings, '</strong>',
                         '<table><thead><tr><th>Categoria</th>',
                         '<th>Puntuaje</th><th style="padding-left: 20px;">%</th>',
                         '</tr></thead>',
@@ -194,5 +193,3 @@ class ChoroplethMap extends Component {
 }
 
 export default ChoroplethMap;
-
-// '<br>Count: <strong>', data.numberOfThings, '</strong>',
